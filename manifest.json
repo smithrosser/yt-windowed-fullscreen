@@ -1,0 +1,27 @@
+{
+	// required stuff
+	"name": "YT Windowed Fullscreen",
+	"version": "0.1",
+	"manifest_version": 2,
+	
+	// recommended stuff
+	"description": "Run YouTube videos in windowed fullscreen",
+	"browser_action": {
+		"default_title": "Run YouTube videos in windowed fullscreen",
+		"default_popup": "popup.html"
+	},
+
+	"content_scripts": [
+		{
+			"matches": [
+				"https://www.youtube.com/"
+			]
+			"js": "content.js"
+		}
+	]
+
+	// app intent
+	"permissions": [
+		"http://*/*", "https://*/*"
+	]
+}
