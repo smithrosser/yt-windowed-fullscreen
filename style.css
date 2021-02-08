@@ -1,0 +1,16 @@
+body {
+	width: 200px;
+	text-align: center;
+}
+
+h4 {
+	font-size: 1.2em;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	background-color: #eee;
+	border: 1px solid #999;
+	border-radius: 5px;
+}
