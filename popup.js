@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    var label = document.getElementById('label');
-    var status = document.getElementById('status');
-    var toggle = document.getElementById('toggle');
+    const label = document.getElementById('label');
+    const status = document.getElementById('status');
+    const toggle = document.getElementById('toggle');
 
     // get currently opened
     chrome.tabs.query({active: true, lastFocusedWindow: true}, (tabs) => {
