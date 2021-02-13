@@ -1,21 +1,33 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
 
     var label = document.getElementById('label');
     var status = document.getElementById('status');
     var toggle = document.getElementById('toggle');
 
     // get currently opened
-    chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, (tabs) => {
         let url = tabs[0].url;
 
-        let matches = url.match(/.*watch\?.*v=([^=&]*).*/);
-        if (matches) {
-            toggle.addEventListener('click', function() {
-                chrome.tabs.update(tabs[0].id, { url: "https://www.youtube.com/embed/" + matches[1] });
+        let matchWatch = url.match(/.*watch\?.*v=([^=&]*).*/);
+        let matchEmbed = url.match(/.*embed\/\.*([^=&]*).*/);
+
+        if (matchWatch) {
+            toggle.className = 'button_enabled';
+            toggle.addEventListener('click', () => {
+                chrome.tabs.update(tabs[0].id, { url: 'https://www.youtube.com/embed/' + matchWatch[1] });
+                window.close();
+            });
+        }
+        else if (matchEmbed) {
+            toggle.className = 'button_enabled';
+            toggle.addEventListener('click', () => {
+                chrome.tabs.update(tabs[0].id, { url: 'https://www.youtube.com/watch?v=' + matchEmbed[1] });
+                window.close();
             });
         }
         else {
-            status.innerHTML = '(probably) invalid url';
+            toggle.className = 'button_disabled';
+            toggle.innerHTML = "(probably) invalid url";
         }
 
     });
